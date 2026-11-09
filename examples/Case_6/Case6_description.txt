@@ -1,0 +1,4 @@
+Case 6: Natural convection in a cavity. Ra=100,000.
+Left wall is hot and right wall is cold.
+
+

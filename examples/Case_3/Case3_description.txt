@@ -1,0 +1,3 @@
+Case3 is sedimentation of a cold elliptical particle in a hot channel according to paper "Thermal Science and Engineering Progress (2022)", Fig. 7,8. gBeta is set zero for inside particle nodes (see calculate_gbeta_index in FlowSolver)
+
+I need to apply keep_particle_at_center to get exactly the same results as non-MPI case in the validation folder.

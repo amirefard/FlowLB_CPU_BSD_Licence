@@ -1,0 +1,11 @@
+Case 9 is a Poiseuille flow in a 2D domain. BC: X_velIn_ZeroGradOut. According to Zuo and He (1997) we have G=2\rho \nu u_max / L^2 where L is the half channel height. 
+In case of constant velocity inlet u_in, the u_max after forming the Poiseuille flow must be u_max = 1.5 u_in.
+
+The code worked very well with both X_velIn_PressureOut (Using Zou-He for the outlet and rho_out=1.0) and also with X_velIn_ZeroGradOut (with NEQ extrapolation scheme in the outlet)
+
+Important: You may need to activate apply_sponge_layer_on_outlet_X(30) in momenta to create a sponge layer.
+
+Simulation stops by residual.
+
+********************************************************************************************************
+

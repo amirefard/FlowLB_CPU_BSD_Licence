@@ -1,0 +1,134 @@
+#===================================================================================================================================== ///
+#                                                       DOMAIN & TIME                                                                  ///
+#===================================================================================================================================== ///
+#Stencil Data
+Flow_Stencil    = D2Q9
+Thermal_Stencil = D2Q5
+
+#Time Data
+t_end      = 2000
+t_data     = 100
+t_vtk      = 1000
+t_info     = 100
+t_time     = 100
+t_recovery = 1100
+
+#Domain Size 
+Nx  = 1201
+Ny  = 401
+Nz  = 1
+tau = 0.6
+
+#===================================================================================================================================== ///
+#                                                       BC & GRAVITY                                                                   ///
+#===================================================================================================================================== ///
+#Gravity and Boundary Velocity Data. All wall velocities (bottom, top, back, front) are along the X direction.
+gravity         = 0.0
+wall_vel_bottom = 0.0
+wall_vel_top    = 0.0
+wall_vel_back   = 0.0
+wall_vel_front  = 0.0
+inletvel        = 0.0
+
+#===================================================================================================================================== ///
+#                                                           THERMAL                                                                    ///
+#===================================================================================================================================== ///
+#Heat Transfer Data
+fluid_init_temp   = 0
+gbeta_x           = 0.0
+gbeta_y           = 0.00007
+gbeta_z           = 0.0
+Tref              = 0.0
+prandtl           = 0.7	
+
+temperature_left  = 0.0
+temperature_right = 0.0
+temperature_bot   = 0.0	
+temperature_top   = 0.0
+temperature_back  = 0.0
+temperature_front = 0.0
+
+heat_flux_left   = 0.0
+heat_flux_right  = 0.0
+heat_flux_bottom = 0.0
+heat_flux_top    = 0.0
+heat_flux_back   = 0.0
+heat_flux_front  = 0.0
+
+#===================================================================================================================================== ///
+#                                                     RESOLVED PARTICLE                                                                ///
+#===================================================================================================================================== ///
+#General Particle Data
+num_particles        = 1
+particle_radius      = 25.0	
+particle_center_x    = 400.0
+particle_center_y    = 200.0
+particle_center_z    = 0.0
+particle_gravity_x   = 0.000013611111111
+particle_gravity_y   = 0.00
+particle_gravity_z   = 0.00	
+particle_den_ratio   = 1.25	
+particle_temperature = 1.0
+particle_heat_source = 0.0
+particle_specific_heat_ratio = 1.0
+particle_offset_x    = 16
+particle_offset_y    = 0
+particle_offset_z    = 0
+
+# Circle and ellipse (2D) Only. For sphere and spheroid will be calculated.
+particle_num_nodes = 200
+
+#Ellipse (2D) and Spheroid (3D) Particle Data
+particle_radius_2 = 6.0
+
+#Spheroid (3D) Only Particle Data
+particle_num_strip  = 30	
+particle_cir_factor = 2.5
+
+#Ellipse (2D) Only Particle Data
+ellipse_init_ang = 0.5
+
+# Particle Collision Data
+particle_r_buffer_verlet = 17
+particle_r_cutoff_verlet = 12
+particle_cij             = 0.4
+particle_ep              = 2.0
+particle_Ep              = 0.1
+particle_epw             = 2.0
+particle_Epw             = 0.1
+particle_th              = 0.4
+particle_thw             = 1.0
+particle_th_lub          = 2.0
+particle_thw_lub         = 2.0
+
+#Multi-Direct Forcing Data
+mdfstep = 5
+
+#===================================================================================================================================== ///
+#                                                FLOW WITHOUT PARTICLE                                                                 ///
+#===================================================================================================================================== ///
+# solid_temperature will only be used for Solid_Thermal_BC = 1 (Solid_Constant_Temperature)
+solid_temperature           = 0.0
+
+# solid_to_fluid_conductivity will only be used for Solid_Thermal_BC = 3 (Solid_Conjugate) 
+solid_to_fluid_conductivity = 1.0 
+
+#===================================================================================================================================== ///
+#                                                         RESIDUAL                                                                     ///
+#===================================================================================================================================== ///
+Stop_by_Residual = 0
+residual_flow    = 1e-4
+residual_thermal = 1e-4
+t_residual       = 1000
+
+#===================================================================================================================================== ///
+#                                                     MPI DATA                                                                         ///
+#===================================================================================================================================== ///
+# MPI Data (Do not change unless necessary)
+num_buffer_layers_X = 1
+num_buffer_layers_Y = 1
+num_buffer_layers_Z = 1
+
+#===================================================================================================================================== ///
+#                                                          END                                                                         ///
+#===================================================================================================================================== ///

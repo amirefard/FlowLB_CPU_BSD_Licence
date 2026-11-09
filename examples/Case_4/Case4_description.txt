@@ -1,0 +1,38 @@
+Case4 is an isothermal flow over a solid rectangle. Flow is driven by gravity and is periodic along the X direction.
+
+
+********************************************************************************************************
+For this project add the following lines to FlowSolver::create_solid_from_dimensions (to create is_solid nodes)
+
+    const int start_solid_global_x = 500;//User defined
+    const int end_solid_global_x   = 570;//User defined
+    const int start_solid_global_y = 80;//User defined
+    const int end_solid_global_y   = 120;//User defined
+    const int start_solid_global_z = 0;//User defined
+    const int end_solid_global_z   = 0;//User defined
+
+    const int start_solid_local_x  = parallelLB.get_Xlocal_from_Xglobal(start_solid_global_x, this_processor_id);
+    const int end_solid_local_x    = parallelLB.get_Xlocal_from_Xglobal(end_solid_global_x,   this_processor_id);
+    const int start_solid_local_y  = parallelLB.get_Ylocal_from_Yglobal(start_solid_global_y, this_processor_id);
+    const int end_solid_local_y    = parallelLB.get_Ylocal_from_Yglobal(end_solid_global_y,   this_processor_id);
+    const int start_solid_local_z  = parallelLB.get_Zlocal_from_Zglobal(start_solid_global_z, this_processor_id);
+    const int end_solid_local_z    = parallelLB.get_Zlocal_from_Zglobal(end_solid_global_z,   this_processor_id);
+
+    if (start_solid_global_x > Nx || end_solid_global_x > Nx || start_solid_global_y > Ny || end_solid_global_y > Ny || start_solid_global_z > Nz || end_solid_global_z > Nz) {
+        throw std::runtime_error("\n------------- Error: start_solid_global_x, or y, or z in create_solid_from_dimensions is larger than Nx or Ny or Nz! ----------------- \n");
+    }
+
+    for (int X = start_solid_local_x; X <= end_solid_local_x; ++X) {//Solid nodes
+        for (int Y = start_solid_local_y; Y <= end_solid_local_y; ++Y) {
+            for (int Z = start_solid_local_z; Z <= end_solid_local_z; ++Z) {
+                #if !STORE_1D_VECTOR
+                    is_solid[X][Y][Z] = TRUE;
+                #endif
+                #if STORE_1D_VECTOR
+                    size_t id3 = idx_3d_vector(X, Y, Z);
+                    is_solid[id3] = TRUE;
+                #endif
+            }
+        }
+    }
+********************************************************************************************************

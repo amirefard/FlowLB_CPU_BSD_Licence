@@ -1,0 +1,50 @@
+# Compiler
+CXX = g++
+
+# Microsoft MPI paths
+MPI_INC = /c/Program\ Files\ \(x86\)/Microsoft\ SDKs/MPI/Include
+MPI_LIB = /c/Program\ Files\ \(x86\)/Microsoft\ SDKs/MPI/Lib/x64
+
+
+# Directories
+SRC_DIR = src
+BUILD_DIR = build
+BIN_DIR = bin
+
+# Target
+TARGET = $(BIN_DIR)/FlowLB_CPU.exe
+
+# Compiler flags
+CXXFLAGS = -O2 -Wall -std=c++17 \
+            -Iinclude \
+            -I$(MPI_INC) \
+            -MMD -MP
+
+# Linker flags
+LDFLAGS = -L$(MPI_LIB) -lmsmpi
+
+# Sources
+SRC = $(wildcard $(SRC_DIR)/*.cpp)
+
+# Objects
+OBJ = $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(SRC))
+
+# Default target
+all: $(TARGET)
+
+# Link
+$(TARGET): $(OBJ)
+	mkdir -p $(BIN_DIR)
+	$(CXX) $^ -o $@ $(LDFLAGS)
+
+# Compile
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+	mkdir -p $(BUILD_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Clean
+clean:
+	rm -rf $(BUILD_DIR) $(BIN_DIR)
+
+# Dependencies
+-include $(OBJ:.o=.d)

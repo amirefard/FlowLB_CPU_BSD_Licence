@@ -1,0 +1,81 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+*.d
+
+# Output file
+FlowLB_CPU
+
+# Mac files
+*.DS_Store
+
+# CodeLite files
+*.mk
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.dll
+*.so
+*.dylib
+
+# Compiled Static libraries
+*.lib
+*.a
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Visual Studio specific files
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.suo
+*.user
+*.vcxproj.filters
+*.vcxproj.user
+*.pdb
+
+# CMake generated files
+CMakeFiles/
+CMakeCache.txt
+CMakeScripts/
+CMakeSettings.json
+
+# Folders
+.vs/
+x64/
+x86/
+build-Release/
+build/
+# Debug/
+# Release/
+
+# Ignore Code::Blocks project files and folders
+*.layout
+*.depend
+*.layout
+obj/
+bin/
+
+# Ignore Code::Blocks user-specific files
+*.cbp_user
+
+# FlowLB output folder and file
+FlowLB_Results/
+Alborz_Results/
+LB_Results/
+
+# Ignore any backup files
+*~
+
+# Excel files
+*.xls
+*.xlsx

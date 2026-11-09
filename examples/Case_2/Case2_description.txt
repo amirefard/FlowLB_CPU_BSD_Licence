@@ -1,0 +1,2 @@
+Case2 is sedimentation of a single 3D spherical particle in a vertical box.
+It is isothermal.

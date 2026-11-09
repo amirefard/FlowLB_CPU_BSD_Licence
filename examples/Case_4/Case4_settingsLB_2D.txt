@@ -1,0 +1,159 @@
+#===================================================================================================================================== ///
+#                                               GENERAL (FLOW FIELD, PARTICLE, THERMAL)                                                ///
+#===================================================================================================================================== ///
+Flow_With_Particle = 0
+
+Flow_With_Thermal_Effect = 0
+
+# Force Calculation method
+Shan_Chen = 1
+Guo       = 0
+Luo       = 0
+
+# Relaxation Time
+SRT = 1
+MRT = 0
+
+#===================================================================================================================================== ///
+#                                                       FLOW FIELD BC                                                                  ///
+#===================================================================================================================================== ///
+# Boundary types. For 2D case set Z_Periodic = 1
+X_Periodic             = 1
+X_Wall                 = 0
+X_velIn_ZeroGradOut    = 0
+X_velIn_PressureOut    = 0
+X_PressureIn_PressureOut = 0
+
+Y_Periodic = 0
+Y_Wall     = 1
+
+Z_Periodic = 1
+Z_Wall     = 0
+
+# If velocity inlet (at X=0) is set you can choose Parabolic or Constant velocity profile. Parabolic only for 2D currently.
+Parabolic_Velocity_Inlet = 0
+Constant_Velocity_Inlet  = 1
+
+#===================================================================================================================================== ///
+#                                                    FLOW WITHOUT PARTICLE                                                             ///
+#===================================================================================================================================== ///
+# 0: No solid, 1: Generate from dimensions in the code, 2: Read solid from file
+Create_Solid = 1
+
+# Thermal BC for solid points: 1: Solid_Constant_Temperature, 2: Solid_Adiabatic, 3: Solid_Conjugate
+Solid_Thermal_BC = 1
+
+#===================================================================================================================================== ///
+#                                                       THERMAL BC, ETC                                                                ///
+#===================================================================================================================================== ///
+# Temperature boundary condition for different walls. In case of Periodic BC in a certain direction, set all temperature BCs = 0 for that direction.
+Left_Fixed_Temp   = 0
+Left_Adiabatic    = 0
+Left_Fixed_Heat_Flux = 0
+
+Right_Fixed_Temp  = 0
+Right_Adiabatic   = 0
+Right_Fixed_Heat_Flux = 0
+
+Bottom_Fixed_Temp = 0
+Bottom_Adiabatic  = 0
+Bottom_Fixed_Heat_Flux = 0
+
+Top_Fixed_Temp    = 0
+Top_Adiabatic     = 0
+Top_Fixed_Heat_Flux = 0
+
+Back_Fixed_Temp   = 0
+Back_Adiabatic    = 0
+Back_Fixed_Heat_Flux = 0
+
+Front_Fixed_Temp  = 0
+Front_Adiabatic   = 0
+Front_Fixed_Heat_Flux = 0
+
+# Force Thermal
+Force_Thermal_1 = 1
+Force_Thermal_2 = 0
+
+# Equilibrium Thermal
+Equilibrium_Thermal_1 = 1
+Equilibrium_Thermal_2 = 0
+
+#===================================================================================================================================== ///
+#                                                       RESOLVED PARTICLE                                                              ///
+#===================================================================================================================================== ///
+# 3D Particle Types (Only for 3D)
+STATIONARY_SPHERE   = 0
+STATIONARY_SPHEROID = 0
+MOVING_SPHERE       = 0
+MOVING_SPHEROID     = 0
+
+# 2D Particle Types (Only for 2D)
+STATIONARY_CYLINDER = 0
+STATIONARY_ELLIPSE  = 0 
+MOVING_CYLINDER     = 0
+MOVING_ELLIPSE      = 1
+
+# Direct Forcing Method
+SDF = 1
+MDF = 0
+
+# Added Mass
+Without_added_mass = 0
+With_added_mass    = 1
+
+# Corrected Radius
+Corrected_Radius = 0
+
+# Delta Function Choice
+Two_Point_Delta          = 0
+Four_Point_Delta         = 1
+Kernel_Delta             = 0
+Modified_Two_Point_Delta = 0
+
+# Collision Models 3D
+Sphere_Collision_1_Feng              = 0
+Sphere_Collision_2_Feng_Verlet       = 0
+Sphere_Collision_3_Feng_Lub_Verlet   = 1
+Spheroid_Collision_1_Feng            = 0
+Spheroid_Collision_2_Feng_Verlet     = 0
+Spheroid_Collision_3_Feng_Lub_Verlet = 1
+
+# Collision Models 2D
+Circle_Collision_1  = 0  
+Circle_Collision_2  = 0 
+Circle_Collision_3  = 1  
+Ellipse_Collision_1 = 0  
+Ellipse_Collision_2 = 0
+Ellipse_Collision_3 = 0
+Ellipse_Collision_4 = 1
+
+# Particle Temperature
+Particle_Fixed_Temperature   = 1
+Particle_Varying_Temperature = 0
+
+# Random Arrangement
+Random_Arrangement_OFF = 1
+Random_Arrangement_ON  = 0
+
+#===================================================================================================================================== ///
+#                                                    OTHER SETTINGS                                                                    ///
+#===================================================================================================================================== ///
+# Read flow initialization data from file (density, 3 velocities, temperature): 0: No, 1 : Yes
+Read_Initialize_Data_From_File = 0
+
+# Recovery Settings
+Recovery_OFF = 1
+Recovery_ON  = 0
+
+# Recovery File Format
+ASCII_Recovery_File  = 0
+BINARY_Recovery_File = 1
+
+# Output visualisation file format
+VTK_ASCII  = 0
+VTK_BINARY = 1
+CASE       = 0
+#===================================================================================================================================== ///
+#                                                          END                                                                         ///
+#===================================================================================================================================== ///

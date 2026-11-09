@@ -1,0 +1,9 @@
+Case 7 is a non-isothermal flow over a solid cylinder at Re = 20. Flow is driven by velocity inlet and zero gradient outlet. Nusselt is calculated from particle_data.dat. 
+
+Nu_nods = Q_node / area_node * D / (k_f * Delta_T)
+
+See the reference benchmark at: Suzuki et al (2018): https://doi.org/10.1016/j.ijheatmasstransfer.2018.01.033
+
+This version is tested successfully with git version fc07f69.
+
+

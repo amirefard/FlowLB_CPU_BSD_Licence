@@ -1,0 +1,11 @@
+Cases:
+********************************************************
+Case 1: Sedimentation of a single 2D circular particle in a vertical box, Fig. 2 of Fard et al. Particuology (2016)
+Case 2: Isothermal sedimentation of a single 3D spherical particle in a vertical box.
+Case 3: Sedimentation of a cold elliptical particle in a hot channel according to paper "Thermal Science and Engineering Progress (2022)", Fig. 7,8.
+Case 4: Isothermal flow over a solid rectangle. Flow is driven by gravity and is periodic along the X direction.
+Case 5: Non-isothermal flow from a hot eccentric cylinder to the surrounding cold fluid. Fard et al. IJHFF (2016) Figs. 3 and 4.
+Case 6: Natural convection in a cavity. Ra=100,000
+Case 7: Non-isothermal flow over a solid cylinder at Re = 20. Suzuki et al (2018): https://doi.org/10.1016/j.ijheatmasstransfer.2018.01.033
+Case 8: Poiseuille flow in a 2D domain. BC: Periodic and driven by gravity. Simulation stops by residual.
+Case 9: Poiseuille flow in a 2D domain. BC: X_velIn_PressureOut. Sponge layer is needed; so activate apply_sponge_layer_on_outlet_X(30); in momenta_flow(). Simulation stops by residual.

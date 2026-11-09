@@ -1,0 +1,78 @@
+Case 10 is a Poiseuille flow with heat transfer in a 2D domain.  According to Zuo and He (1997) we have G=2\rho \nu u_max / L^2 where L is the half channel height. 
+In case of constant velocity inlet u_in, the u_max after forming the Poiseuille flow must be u_max = 1.5 u_in.
+
+Also the Nusselt number must approach 7.54 (not very close to the channel end where T=1 everywhere). Nu = D_h/(Tw - Tb) * dT/dY. And D_h = 2 * H
+Tb = \int{Ux.T}_0^H / \int{Ux}_0^H
+
+Simulation stops by residual.
+
+********************************************************************************************************
+Nusselt calculation on the lower wall:
+
+    /// For channel with heat transfer where the Nu=7.54
+    #if STORE_1D_VECTOR
+    /// Using the FD approach
+    /*double T_wall = 1.0;
+    double D_h = 2 * (Ny - 2);//Hydraulic diameter
+    double tgrad[Nx];
+    size_t id3, id4_velx;
+    double local_Nusselt{};
+    for (int X = start_x; X <= end_x; X++){
+        double T_bulk  = 0;
+        double sum_u_T = 0;
+        double sum_u   = 0;
+        for (int Y = start_y; Y <= end_y; Y++){
+            id3      = idx_3d_vector(X, Y, 1);
+            id4_velx = idx_4d_vector(0, X, Y, 1);
+            sum_u   += velocity[id4_velx];
+            sum_u_T += velocity[id4_velx] * temperature[id3];
+        }
+        T_bulk   = sum_u_T / (sum_u);
+        id3      = idx_3d_vector(X, 1, 1);
+        tgrad[X] = (T_wall - temperature[id3]) / 0.5;// 0.5 is due two half way bounce back
+        //cout << "X = " << X << " , T_bulk = " << T_bulk << " , tgrad[X]= " << tgrad[X] << endl;
+        local_Nusselt = tgrad[X] / (T_wall - T_bulk) * D_h;
+        output_file << local_Nusselt << " ";
+    }*/
+    #endif
+    //===================================================================//
+    /// Or using the moment of non-equilibrium distribution function (Eq 21 in Tao et al (2020)  A curved lattice Boltzmann boundary scheme for thermal convectiveflows with Neumann boundary condition)
+    #if STORE_1D_VECTOR
+    double D_h = 2 * (Ny - 2);//Hydraulic diameter
+    double tgrad[Nx];
+    double T_wall = 1.0;
+    int id3, id4_velx;
+    int id4_0, id4_1, id4_2;
+    double local_Nusselt{};
+    for (int X = start_x; X <= end_x; X++){
+        double T_bulk  = 0;
+        double sum_u_T = 0;
+        double sum_u   = 0;
+        for (int Y = start_y; Y <= end_y; Y++){
+            id3      = idx_3d_vector(X, Y, 1);
+            id4_velx = idx_4d_vector(0, X, Y, 1);
+            sum_u   += velocity[id4_velx];
+            sum_u_T += velocity[id4_velx] * temperature[id3];
+        }
+        T_bulk   = sum_u_T / (sum_u);
+
+        id3   = idx_3d_vector(X, 1, 1);
+        id4_0 = idx_4d_vector(0, X, 1, 1);
+        id4_1 = idx_4d_vector(1, X, 1, 1);
+        id4_2 = idx_4d_vector(2, X, 1, 1);
+        tgrad[X] = 0;
+        for (INT32 P = 0; P < stencil_directions_T; ++P)
+        {
+            double popEq_T = equilibrium_thermal(temperature[id3], density[id3], velocity[id4_0], velocity[id4_1], velocity[id4_2], P);
+            tgrad[X] += cy_pop_T[P] * (pop_T[idx_4d_vector(P, X, 1, 1)] - popEq_T);// Temperature gradient along Y direction
+        }
+        tgrad[X] *= 1.0 / (cs_2_Thermal * tau_t);// See Eq 21 of Tao et al (2020)
+        //double tgrad2 = (T_wall - temperature[id3]) / 0.5;
+        local_Nusselt = tgrad[X] / (T_wall - T_bulk) * D_h;
+        output_file << local_Nusselt << " ";
+    }
+    #endif
+
+	output_file << "\n";
+
+

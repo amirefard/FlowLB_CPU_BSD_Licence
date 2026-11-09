@@ -1,0 +1,37 @@
+Case5 is a non isothermal flow from a hot eccentric cylinder to the surrounding cold fluid. Cylinder is fixed. In this test case, I represented the cylinder with is_solid and calculated the Nusselt number along the left vertical wall (Alternative is to represent the cylinder with STAIONARY_CYLINDER). 
+
+It is the same as the test case in IJHFF (2016) Fig. 3 and 4.
+
+Successfully tested with git 2f13eca.
+
+********************************************************************************************************
+For this project add the following lines to FlowSolver::create_solid_from_dimensions (to create is_solid nodes)
+
+    double cir_center_x = 100 + 1;
+    double cir_center_y = 120 + 1;
+    double cir_radius   = 40;
+
+    for (int X = 0 + 1; X < Nx + 1; ++X) {//Define Solid nodes
+    	for (int Y = 0 + 1; Y < Ny + 1; ++Y) {
+            for (int Z = 1; Z < 2; ++Z) {
+                if ((SQ(X - cir_center_x) + SQ(Y - cir_center_y)) <= SQ(cir_radius))	{
+                    size_t id3 = idx_3d_vector(X, Y, Z);
+                    is_solid[id3] = TRUE;
+                }
+            }
+    	}
+    }
+
+********************************************************************************************************
+ And add the following lines to FlowSolver::write_fluid_data to calculate Nusselt number
+
+    double T_wall = 0.0;
+    double tgrad[Ny];
+	for (int Y = 1; Y < Ny - 1; Y++){
+        size_t id3 = idx_3d_vector(1, Y, 1);// If limitBound_left_X != 0, change the X=2
+		tgrad[Y] = (T_wall - temperature[id3]) / 0.5;// 0.5 is due two half way bounce back
+		double local_Nusselt = tgrad[Y] * (Ny - 2);
+		output_file << local_Nusselt << " ";
+	}
+	output_file << "\n";
+********************************************************************************************************

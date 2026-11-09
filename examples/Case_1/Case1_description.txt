@@ -1,0 +1,2 @@
+Case1 is sedimentation of a single 2D circular particle in a vertical box according to paper Particuology (2016) Fig. 2.
+It is isothermal.

@@ -1,0 +1,6 @@
+Case 8 is a Poiseuille flow in a 2D domain. BC: Periodic and driven by gravity. According to Zuo and He (1997) we have G=2\rho \nu u_max / L^2 where L is the half channel height. For the current configuration, u_max should be 0.049005 and my simulation gives 0.051.
+
+Simulation stops by residual.
+
+********************************************************************************************************
+
